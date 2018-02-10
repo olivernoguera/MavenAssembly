@@ -31,6 +31,7 @@
             <outputDirectory></outputDirectory>
             <includes>
                 <include>quote.*</include>
+                <include>*.csv</include>
             </includes>
         </fileSet>
         <!--

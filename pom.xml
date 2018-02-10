@@ -15,6 +15,15 @@
         <java.version>1.8</java.version>
     </properties>
 
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/com.opencsv/opencsv -->
+        <dependency>
+            <groupId>com.opencsv</groupId>
+            <artifactId>opencsv</artifactId>
+            <version>4.1</version>
+        </dependency>
+    </dependencies>
+
     <build>
 
         <plugins>
@@ -62,7 +71,7 @@
                                 <mainClass>es.onoguera.zopa.test.ZopaTest</mainClass>
                             </classPath>
                             <jre>
-                                <minVersion>1.6.0</minVersion>
+                                <minVersion>1.7.0</minVersion>
                                 <maxVersion>1.8.0_21</maxVersion>
                                 <initialHeapSize>512</initialHeapSize>
                                 <maxHeapSize>1024</maxHeapSize>
@@ -100,6 +109,14 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
             </plugin>
 
         </plugins>
