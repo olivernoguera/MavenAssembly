@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>es.onoguera</groupId>
+    <artifactId>zopa.test</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <compiler.plugin>3.1</compiler.plugin>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <shade.plugin>3.1.0</shade.plugin>
+        <java.version>1.8</java.version>
+    </properties>
+
+    <build>
+
+        <plugins>
+
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>${shade.plugin}</version>
+
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <finalName>app</finalName>
+                    <transformers>
+                        <transformer
+                                implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                            <mainClass>es.onoguera.zopa.test.ZopaTest</mainClass>
+                        </transformer>
+                    </transformers>
+                    <filters>
+                        <filter>
+                            <artifact>*:*</artifact>
+                            <excludes>
+                                <exclude>META-INF/*.SF</exclude>
+                                <exclude>META-INF/*.DSA</exclude>
+                                <exclude>META-INF/*.RSA</exclude>
+                                <exclude>META-INF/*.EC</exclude>
+                                <exclude>.settings/**</exclude>
+                                <exclude>*.classpath</exclude>
+                                <exclude>*.project</exclude>
+                                <exclude>*.txt</exclude>
+                            </excludes>
+                        </filter>
+                    </filters>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.akathist.maven.plugins.launch4j</groupId>
+                <artifactId>launch4j-maven-plugin</artifactId>
+                <version>1.7.21</version>
+                <executions>
+                    <execution>
+                        <id>console</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>launch4j</goal>
+                        </goals>
+                        <configuration>
+                            <headerType>console</headerType>
+                            <outfile>target/quote.exe</outfile>
+                            <jar>target/${project.artifactId}-${project.version}.jar</jar>
+                            <dontWrapJar>false</dontWrapJar>
+                            <errTitle>Error in launch4j plugin</errTitle>
+                            <classPath>
+                                <mainClass>es.onoguera.zopa.test.ZopaTest</mainClass>
+                            </classPath>
+                            <jre>
+                                <minVersion>1.6.0</minVersion>
+                                <maxVersion>1.8.0_21</maxVersion>
+                                <initialHeapSize>512</initialHeapSize>
+                                <maxHeapSize>1024</maxHeapSize>
+                            </jre>
+                            <versionInfo>
+                                <fileVersion>1.0.0.0</fileVersion>
+                                <txtFileVersion>1.0.0.0</txtFileVersion>
+                                <fileDescription>Zopa test</fileDescription>
+                                <copyright>Copyright (c) 2017</copyright>
+                                <companyName>comp</companyName>
+                                <productVersion>3.0.0.0</productVersion>
+                                <txtProductVersion>${project.version}</txtProductVersion>
+                                <productName>app</productName>
+                                <internalName>Zopa test</internalName>
+                                <originalFilename>app.exe</originalFilename>
+                            </versionInfo>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.5.3</version>
+                <configuration>
+                    <descriptor>${project.basedir}/assembly.xml</descriptor>
+                    <finalName>ZopaTest</finalName>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>create-archive</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+
+    </build>
+</project>
