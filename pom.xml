@@ -18,44 +18,27 @@
     <build>
 
         <plugins>
-
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>${shade.plugin}</version>
-
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                    </execution>
-                </executions>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.5</version>
                 <configuration>
-                    <finalName>app</finalName>
-                    <transformers>
-                        <transformer
-                                implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                    <!-- Configures the created archive -->
+                    <archive>
+                        <!-- Configures the content of the created manifest -->
+                        <manifest>
+                            <!-- Adds the classpath to the created manifest -->
+                            <addClasspath>true</addClasspath>
+                            <!--
+                                Specifies that all dependencies of our application are found
+                                from the lib directory.
+                            -->
+                            <classpathPrefix>lib/</classpathPrefix>
+                            <!-- Configures the main class of the application -->
                             <mainClass>es.onoguera.zopa.test.ZopaTest</mainClass>
-                        </transformer>
-                    </transformers>
-                    <filters>
-                        <filter>
-                            <artifact>*:*</artifact>
-                            <excludes>
-                                <exclude>META-INF/*.SF</exclude>
-                                <exclude>META-INF/*.DSA</exclude>
-                                <exclude>META-INF/*.RSA</exclude>
-                                <exclude>META-INF/*.EC</exclude>
-                                <exclude>.settings/**</exclude>
-                                <exclude>*.classpath</exclude>
-                                <exclude>*.project</exclude>
-                                <exclude>*.txt</exclude>
-                            </excludes>
-                        </filter>
-                    </filters>
+                        </manifest>
+                    </archive>
+                    <finalName>app</finalName>
                 </configuration>
             </plugin>
             <plugin>
@@ -72,7 +55,7 @@
                         <configuration>
                             <headerType>console</headerType>
                             <outfile>target/quote.exe</outfile>
-                            <jar>target/${project.artifactId}-${project.version}.jar</jar>
+                            <jar>target/app.jar</jar>
                             <dontWrapJar>false</dontWrapJar>
                             <errTitle>Error in launch4j plugin</errTitle>
                             <classPath>
