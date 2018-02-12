@@ -7,11 +7,15 @@ import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class CSVLenders {
 
-    private List<CSVLender> CSVLenders;
+    private Set<CSVLender> CSVLenders;
 
     public CSVLenders(String path) throws IOException {
         Reader reader = Files.newBufferedReader(Paths.get(path));
@@ -19,10 +23,10 @@ public class CSVLenders {
                 .withType(CSVLender.class)
                 .withIgnoreLeadingWhiteSpace(true)
                 .build();
-        this.CSVLenders = csvToBean.parse();
+        this.CSVLenders = new TreeSet<>(csvToBean.parse());
     }
 
     public List<CSVLender> getCSVLenders() {
-        return CSVLenders;
+        return new ArrayList<>(CSVLenders);
     }
 }

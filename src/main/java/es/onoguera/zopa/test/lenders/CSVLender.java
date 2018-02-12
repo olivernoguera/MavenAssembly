@@ -3,7 +3,7 @@ package es.onoguera.zopa.test.lenders;
 import com.opencsv.bean.CsvBindByName;
 
 
-public class CSVLender {
+public class CSVLender implements Comparable<CSVLender> {
 
     @CsvBindByName
     private String lender;
@@ -44,5 +44,10 @@ public class CSVLender {
                 ", rate=" + rate +
                 ", available=" + available +
                 '}';
+    }
+
+    @Override
+    public int compareTo(CSVLender that) {
+        return this.getRate().compareTo(that.getRate());
     }
 }
