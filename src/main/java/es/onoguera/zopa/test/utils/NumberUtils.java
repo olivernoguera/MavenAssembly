@@ -1,6 +1,8 @@
 package es.onoguera.zopa.test.utils;
 
-import java.math.BigDecimal;
+import org.apache.commons.lang3.StringUtils;
+
+import java.text.DecimalFormat;
 
 public final class NumberUtils {
 
@@ -38,9 +40,9 @@ public final class NumberUtils {
      * @param decimalPlace
      * @return
      */
-    public static double round(double d, int decimalPlace) {
-        BigDecimal bd = new BigDecimal(Double.toString(d));
-        bd = bd.setScale(decimalPlace, BigDecimal.ROUND_HALF_UP);
-        return bd.doubleValue();
+    public static String round(double d, Integer decimalPlace) {
+        DecimalFormat df = new DecimalFormat("#." + StringUtils.left("0", decimalPlace));
+        return df.format(d);
     }
+
 }

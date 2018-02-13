@@ -1,6 +1,5 @@
 package es.onoguera.zopa.test;
 
-import es.onoguera.zopa.test.lenders.CSVLender;
 import es.onoguera.zopa.test.lenders.CSVLenders;
 import es.onoguera.zopa.test.loan.Loan;
 import es.onoguera.zopa.test.loan.LoanService;
@@ -27,25 +26,25 @@ public class ZopaTest {
         String path = args[0];
         CSVLenders csvLenders = new CSVLenders(path);
         LoanService loanService = new LoanService();
-        loanService.calculateLoan(csvLenders,loan);
+        loanService.calculateLoan(csvLenders, loan);
         loanService.printLoan(loan);
         exit(0);
     }
 
-    private static Integer parseAmount(String argAmount){
+    private static Integer parseAmount(String argAmount) {
         Integer amount = null;
         if (NumberUtils.isPositiveInteger(argAmount)) {
             amount = Integer.parseInt(argAmount);
-        }else{
+        } else {
             System.out.println("Amount must be positive integer");
             exit(1);
         }
-        if( amount > MAX_AMOUNT || amount < MIN_AMOUNT){
-            System.out.println(String.format("Amount must be between %d and %d",MIN_AMOUNT,MAX_AMOUNT));
+        if (amount > MAX_AMOUNT || amount < MIN_AMOUNT) {
+            System.out.println(String.format("Amount must be between %d and %d", MIN_AMOUNT, MAX_AMOUNT));
             exit(1);
         }
-        if( amount % AMOUNT_PIECE != 0){
-            System.out.println(String.format("Amount must be multiple of %d",AMOUNT_PIECE));
+        if (amount % AMOUNT_PIECE != 0) {
+            System.out.println(String.format("Amount must be multiple of %d", AMOUNT_PIECE));
             exit(1);
         }
         return amount;

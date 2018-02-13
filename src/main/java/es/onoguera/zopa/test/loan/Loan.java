@@ -1,13 +1,22 @@
 package es.onoguera.zopa.test.loan;
 
-import es.onoguera.zopa.test.utils.NumberUtils;
-
 public class Loan {
 
     private Integer requestAmount;
     private Double rate;
     private Double monthlyPayment;
     private Double totalPayment;
+
+
+    public Loan() {
+    }
+
+    public Loan(Integer requestAmount, Double rate, Double monthlyPayment, Double totalPayment) {
+        this.requestAmount = requestAmount;
+        this.rate = rate;
+        this.monthlyPayment = monthlyPayment;
+        this.totalPayment = totalPayment;
+    }
 
     public Integer getRequestAmount() {
         return requestAmount;
