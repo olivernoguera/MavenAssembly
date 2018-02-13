@@ -32,8 +32,6 @@ public class ZopaTest {
         exit(0);
     }
 
-
-
     private static Integer parseAmount(String argAmount){
         Integer amount = null;
         if (NumberUtils.isPositiveInteger(argAmount)) {
